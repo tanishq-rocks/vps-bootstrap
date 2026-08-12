@@ -2,6 +2,16 @@
 
 A single Bash script that takes a freshly provisioned Ubuntu/Debian VPS and turns it into a secure, Docker-ready server in a few minutes.
 
+## Table of Contents
+
+- [Why use this](#why-use-this)
+- [What it does](#what-it-does)
+  - [Safety & logging](#safety--logging)
+  - [What it does NOT do](#what-it-does-not-do)
+- [Quick Start](#quick-start)
+- [Requirements](#requirements)
+- [Logs](#logs)
+
 ## Why use this
 
 Every new VPS starts out wide open: root login over SSH, no firewall, no automatic security patches, and none of the tooling you actually need. Doing this setup by hand is repetitive and easy to get wrong (or forget a step). This script automates the standard hardening + bootstrap checklist so every server you spin up starts from the same secure, known-good baseline — idempotent, logged, and safe to re-run.
