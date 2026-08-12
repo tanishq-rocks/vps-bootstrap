@@ -11,6 +11,7 @@ A single Bash script that takes a freshly provisioned Ubuntu/Debian VPS and turn
 - [Quick Start](#quick-start)
 - [Requirements](#requirements)
 - [Logs](#logs)
+- [License](#license)
 
 ## Why use this
 
@@ -97,3 +98,7 @@ If anything fails, check the log file mentioned in the error message:
 ```bash
 cat /var/log/<project>-vps-setup.log
 ```
+
+## License
+
+[MIT](LICENSE)
