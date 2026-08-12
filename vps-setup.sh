@@ -17,6 +17,7 @@ SCRIPT_VERSION="v1.1"
 # 3. Swap (optional): Asks if you want a swap file for extra memory
 #    headroom, and if so, how large — useful on small (e.g. 1GB RAM) VPS
 #    instances where package upgrades and Docker workloads can exhaust RAM.
+#    Swap usage can be checked anytime afterward with 'htop' (Swp meter).
 # 4. System Updates: Updates package lists and upgrades all system packages.
 # 5. Core Utilities & Security: Installs essential tools (ufw, curl, wget, git,
 #    ca-certificates, gnupg, htop) and starts Fail2Ban to block malicious IPs.
@@ -258,6 +259,7 @@ if [[ "$ADD_SWAP" =~ ^y(es)?$ ]]; then
             || echo '/swapfile none swap sw 0 0' >> /etc/fstab
 
         info "Created and enabled a ${SWAP_SIZE} swap file at /swapfile"
+        info "Tip: run 'htop' later to see swap usage (Swp meter near the top)"
     fi
 else
     info "Skipping swap setup"
