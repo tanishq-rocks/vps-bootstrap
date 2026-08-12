@@ -4,15 +4,16 @@ A single Bash script that takes a freshly provisioned Ubuntu/Debian VPS and turn
 
 ## Table of Contents
 
-- [Why use this](#why-use-this)
-- [What it does](#what-it-does)
-  - [Safety & logging](#safety--logging)
-  - [What it does NOT do](#what-it-does-not-do)
-- [Quick Start](#quick-start)
-- [Firewall Setup](FIREWALL.md)
-- [Requirements](#requirements)
-- [Logs](#logs)
-- [License](#license)
+- [VPS Setup Script](#vps-setup-script)
+  - [Table of Contents](#table-of-contents)
+  - [Why use this](#why-use-this)
+  - [What it does](#what-it-does)
+    - [Safety \& logging](#safety--logging)
+    - [What it does NOT do](#what-it-does-not-do)
+  - [Quick Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Logs](#logs)
+  - [License](#license)
 
 ## Why use this
 
@@ -25,7 +26,9 @@ Run against a fresh root session, the script:
 1. **Initial checks** — confirms it's running as root and that the OS supports `apt-get`/`systemd`, otherwise aborts.
 2. **User setup** — prompts for a new non-root username, creates the account (via `adduser`, so you set the password interactively), and adds it to the `sudo` group.
 3. **SSH hardening** — backs up `/etc/ssh/sshd_config`, then drops in `/etc/ssh/sshd_config.d/10-<project>.conf` to disable password-based **root** login (`PermitRootLogin prohibit-password`) while keeping key and password auth available for the new user. Validates the config with `sshd -t` before restarting SSH.
-4. **Swap (optional)** — asks if you want a swap file for extra memory headroom, and if so, what size (e.g. `512M` or `2G`, default `1G`). Creates `/swapfile`, locks down its permissions, formats and enables it, and adds it to `/etc/fstab` so it persists across reboots. Useful on small (e.g. 1GB RAM) VPS instances where package upgrades and Docker workloads can exhaust memory. Once set up, you can check swap usage anytime with `htop` (look for the `Swp` meter near the top).
+4. **Swap (optional)** — asks if you want a swap file for extra memory headroom, and if so, what size (e.g. `512M` or `2G`, default `1G`). Creates `/swapfile`, locks down its permissions, formats and enables it, and adds it to `/etc/fstab` so it persists across reboots. Useful on small (e.g. 1GB RAM) VPS instances where package upgrades and Docker workloads can exhaust memory. Once set up, you can check swap usage anytime with `htop` (look for the `Swp` meter near the top):
+
+   ![htop showing the Swp meter](assets/images/htop-swap.png)
 5. **System updates** — runs `apt-get update` and `apt-get upgrade -y`.
 6. **Core packages & security** — installs `ufw`, `curl`, `wget`, `git`, `ca-certificates`, `gnupg`, `htop`, and `fail2ban` (enabled immediately to block brute-force login attempts).
 7. **Auto-patching** — installs and configures `unattended-upgrades` so future security updates apply automatically.
