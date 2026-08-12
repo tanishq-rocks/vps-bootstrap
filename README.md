@@ -36,30 +36,39 @@ You still need to do this manually afterward:
 
 ## Quick Start
 
-1. Spin up a fresh Ubuntu/Debian VPS and copy `vps-setup.sh` to it (or clone this repo on the server).
-2. SSH in as root (or a user with root access).
-3. Run the script:
+1. Spin up a fresh Ubuntu/Debian VPS and SSH in as root (or a user with root access).
+2. Get the script onto the server and run it, using whichever option is easiest:
+
+   **Option A — one-liner (no clone needed):**
 
    ```bash
+   curl -fsSL https://raw.githubusercontent.com/tanishq-rocks/vps-bootstrap/main/vps-setup.sh | sudo bash
+   ```
+
+   **Option B — clone the repo:**
+
+   ```bash
+   git clone https://github.com/tanishq-rocks/vps-bootstrap.git
+   cd vps-bootstrap
    sudo bash vps-setup.sh
    ```
 
-4. Follow the prompts:
+3. Follow the prompts:
    - Enter a **project name** (used to label the log file and SSH config, e.g. `myapp`).
    - Enter a **username** for the new non-root user (defaults to `noname` if left blank), then set its password when `adduser` asks.
    - Choose whether to add **swap** for extra memory, and if so, a size (e.g. `512M` or `2G`, default `1G`).
-5. Wait for the script to finish. It will print the server's IP and tell you how to reconnect. If a reboot is required, it reboots automatically after 5 seconds.
-6. Reconnect as the new user:
+4. Wait for the script to finish. It will print the server's IP and tell you how to reconnect. If a reboot is required, it reboots automatically after 5 seconds.
+5. Reconnect as the new user:
 
    ```bash
    ssh <your-username>@<server-ip>
    ```
 
-7. **Finish hardening manually:**
+6. **Finish hardening manually:**
    - Copy your SSH public key to the new user (`ssh-copy-id <your-username>@<server-ip>`) and confirm key-based login works.
    - Edit `/etc/ssh/sshd_config.d/10-<project>.conf` and set `PasswordAuthentication no`, then restart SSH (`sudo systemctl restart ssh`).
    - See [POST-SETUP.md](POST-SETUP.md) for the full, safe step-by-step walkthrough (including how to avoid locking yourself out).
-8. (Optional) Install [Dokploy](https://dokploy.com) for app deployment:
+7. (Optional) Install [Dokploy](https://dokploy.com) for app deployment:
 
    ```bash
    curl -sSL https://dokploy.com/install.sh | sudo bash

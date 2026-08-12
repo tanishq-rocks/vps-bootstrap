@@ -1,6 +1,6 @@
 # Finish Hardening: Switch to Key-Only SSH
 
-This is the detailed walkthrough for **step 7** of the [Quick Start](README.md#quick-start) in the README: *"Finish hardening manually."*
+This is the detailed walkthrough for the **"Finish hardening manually"** step of the [Quick Start](README.md#quick-start) in the README.
 
 `vps-setup.sh` intentionally leaves password authentication turned on for your new user. If it disabled passwords automatically, and your SSH key didn't work for any reason, you'd be locked out of the server with no way back in. These steps close that gap safely, in the right order, so you never lose access.
 
