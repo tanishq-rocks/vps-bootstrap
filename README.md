@@ -9,6 +9,7 @@ A single Bash script that takes a freshly provisioned Ubuntu/Debian VPS and turn
   - [Safety & logging](#safety--logging)
   - [What it does NOT do](#what-it-does-not-do)
 - [Quick Start](#quick-start)
+- [Firewall Setup](FIREWALL.md)
 - [Requirements](#requirements)
 - [Logs](#logs)
 - [License](#license)
@@ -28,7 +29,7 @@ Run against a fresh root session, the script:
 5. **System updates** — runs `apt-get update` and `apt-get upgrade -y`.
 6. **Core packages & security** — installs `ufw`, `curl`, `wget`, `git`, `ca-certificates`, `gnupg`, `htop`, and `fail2ban` (enabled immediately to block brute-force login attempts).
 7. **Auto-patching** — installs and configures `unattended-upgrades` so future security updates apply automatically.
-8. **Firewall lockdown** — enables UFW: deny all incoming by default, allow all outgoing, explicitly allow SSH, HTTP (80), and HTTPS (443).
+8. **Firewall lockdown** — enables UFW: deny all incoming by default, allow all outgoing, explicitly allow SSH, HTTP (80), and HTTPS (443). See [FIREWALL.md](FIREWALL.md) for how to view/add/remove rules later, plus how this interacts with your VPS provider's own network firewall.
 9. **Docker** — installs Docker Engine via the official `get.docker.com` script, enables the systemd service, and adds the new user to the `docker` group (so they can run containers without `sudo`).
 10. **Final output** — prints the server's public IP and the command to reconnect as the new user, and reboots automatically if the kernel/packages require it.
 
